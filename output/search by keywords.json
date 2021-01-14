@@ -1,0 +1,114 @@
+{
+  "kind": "youtube#searchListResponse",
+  "etag": "gcKxBn2Q0gHt2y2op6VdhySXn34",
+  "nextPageToken": "CDIQAA",
+  "regionCode": "ID",
+  "pageInfo": {
+    "totalResults": 138,
+    "resultsPerPage": 3
+  },
+  "items": [
+    {
+      "kind": "youtube#searchResult",
+      "etag": "FWDLKhg-T_sBmp9ZI9KMLY3e5PE",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "aj51BV4KOYs"
+      },
+      "snippet": {
+        "publishedAt": "2020-12-07T01:31:25Z",
+        "channelId": "UCPvi3d3MAILSVKRIU_1Mnkg",
+        "title": "PSBB Transisi Jakarta Diperpanjang, Berlaku hingga 21 Desember 2020",
+        "description": "Pemerintah Provinsi (Pemprov) DKI Jakarta kembali memperpanjang Pembatasan Sosial Berskala Besar (PSBB) transisi. . Perpanjangan PSBB transisi Jakarta ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/aj51BV4KOYs/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/aj51BV4KOYs/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/aj51BV4KOYs/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "Pikiran Rakyat",
+        "liveBroadcastContent": "none",
+        "publishTime": "2020-12-07T01:31:25Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "MqwffVPgcm2Ld6JL3ZRIrbWuUjw",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "ub1FIZcjFjc"
+      },
+      "snippet": {
+        "publishedAt": "2020-12-06T17:07:47Z",
+        "channelId": "UCdKJq7VPSSS6Yhbz2WysOeA",
+        "title": "PSBB Transisi di Jakarta Diperpanjang sampai 21 Desember 2020",
+        "description": "PSBB Transisi di Jakarta Diperpanjang sampai 21 Desember 2020.. https://www.youtube.com/channel/UCdKJq7VPSSS6Yhbz2WysOeA?sub_confirmation=1 ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/ub1FIZcjFjc/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/ub1FIZcjFjc/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/ub1FIZcjFjc/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "BG Tran",
+        "liveBroadcastContent": "none",
+        "publishTime": "2020-12-06T17:07:47Z"
+      }
+    },
+    {
+      "kind": "youtube#searchResult",
+      "etag": "IcQSGLmHPXrWPDeswZk_fMTUmgQ",
+      "id": {
+        "kind": "youtube#video",
+        "videoId": "68HX1KHNyFM"
+      },
+      "snippet": {
+        "publishedAt": "2020-12-02T06:00:02Z",
+        "channelId": "UCMzeVf1cGe6RSK0Olh8AVtw",
+        "title": "Anies Baswedan Positif Covid-19 Jakarta PSBB Total, Masyarakat Bergejolak | Suara Milenial",
+        "description": "Gubernur DKI Jakarta Anies Baswedan positif covid-19. Sebelumnya Anies Baswedan tak merasakan gejala apapun, dan kini ia melakukan isolasi mandiri di ...",
+        "thumbnails": {
+          "default": {
+            "url": "https://i.ytimg.com/vi/68HX1KHNyFM/default.jpg",
+            "width": 120,
+            "height": 90
+          },
+          "medium": {
+            "url": "https://i.ytimg.com/vi/68HX1KHNyFM/mqdefault.jpg",
+            "width": 320,
+            "height": 180
+          },
+          "high": {
+            "url": "https://i.ytimg.com/vi/68HX1KHNyFM/hqdefault.jpg",
+            "width": 480,
+            "height": 360
+          }
+        },
+        "channelTitle": "GenPI co",
+        "liveBroadcastContent": "none",
+        "publishTime": "2020-12-02T06:00:02Z"
+      }
+    }
+  ]
+}
