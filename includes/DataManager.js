@@ -1,5 +1,6 @@
 const redis = require('redis');
 const Crypto = require("crypto");
+let storage = require("node-persist");
 let Sources = require("./../data/sources.json")
 //let Article = require('./Article.js');
 let Link = require('./Link.js');
@@ -10,16 +11,23 @@ let sentiment = new SentimentAnalysis();
 
 var docs = [];
 var config = {
-    bulkEvery: 10000,
+    bulkEvery: 10,
     index: 'media_internasional',
-    type: 'data',
+    type: 'article',
 };
 var counter = {
     found: 0,
     indexed: 0,
     scriptStart: process.hrtime()
 };
-
+storage.init({
+    dir: __dirname+'/logs/',
+    stringify: JSON.stringify,
+    parse: JSON.parse,
+    encoding: 'utf8',
+    logging: false,  // can also be custom logging function
+    forgiveParseErrors: false 
+});
 module.exports = class DataManager{
     constructor(port, finishedInit){
         let theBase = this;
@@ -67,42 +75,45 @@ module.exports = class DataManager{
                     let url = reply[i];
                     let link = linksViaUrls[url];
                     let id = theBase.lastLinkId++;
-                    let arr = [
-                        "title", "", 
-                        "date", "", 
-                        "sourceId", "", 
-                        "url", ""
-                    ];
-                    let data = link==undefined ? arr : link.getDataArray();
+                    let data = link==undefined ? [] : link.getDataArray();
                     data.push('id', id);
                     theBase.client.hmset("link:" + id, data);
                     // map to bulk es
-                    let doc = {};
-                    doc.url = reply[i];
-                    doc.link = linksViaUrls[url];
-                    // let id = theBase.lastLinkId++;
-                    doc.title = data[1];
-                    doc.description = data[1];
-                    doc.timestamp = data[3];
-                    doc.sourceId = sourceId;
-                    doc.base_url=null;
-                    doc.name_news=null;
-                    for (let j = 0; j < Sources.length; j++){
-                        if(Sources[j].id=sourceId){
-                            doc.base_url = Sources[j].url;
-                            doc.name_news = Sources[j].name;
-                            break;
+                    if(data.length>0){
+                        try{
+                            let doc = {};
+                            doc.url = reply[i];
+                            doc.link = linksViaUrls[url];
+                            doc.title = data[1];
+                            doc.description = data[1];
+                            doc.timestamp = data[3];
+                            doc.sourceId = sourceId;
+                            doc.base_url=null;
+                            doc.name_news=null;
+                            for (let j = 0; j < Sources.length; j++){
+                                if(Sources[j].id=sourceId){
+                                    doc.base_url = Sources[j].url;
+                                    doc.name_news = Sources[j].name;
+                                    break;
+                                }
+                            }
+                            doc.sentiment = sentiment.getSentimentScore(data[1].split(" "));
+
+                            let timestamp = Math.floor(Date.now() / 1000)
+                            let nid = Crypto.createHash("sha1").update(timestamp.toString()+String(doc.url)).digest("hex");
+                            docs.push({ index: {_index: config.index, _type: config.type, _id: nid} });
+                            docs.push(doc);
+                        }catch(err){
+                            console.error(err)
                         }
                     }
-                    doc.sentiment = sentiment.getSentimentScore(data[1].split(" "));
-
-                    let timestamp = Math.floor(Date.now() / 1000)
-                    let nid = Crypto.createHash("sha1").update(timestamp.toString()+String(doc.url)).digest("hex");
-                    docs.push({ index: {_index: config.index, _type: config.type, _id: nid} });
-                    docs.push(doc);
                 }
-                if (docs.length>0 && docs.length >= config.bulkEvery) {
+                if (docs.length>0) { // && docs.length >= config.bulkEvery
                     console.log("Bulk every len ", docs.length)
+                    storage.setItem('article_'+sourceId,JSON.stringify(docs))
+                    .then(function() {
+                        console.log("Saved Data Crawler");
+                    });
                     theBase.bulkInsert(docs);
                 }
                 if(reply.length != 0){

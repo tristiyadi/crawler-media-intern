@@ -34,7 +34,7 @@ module.exports = class Link{
 
     getWords()
     {
-        let words = this.title.split(/[,\.\-#+^<´>|;:_'*~?=\")(/&%$§!) ]+/);
+        let words = this.title==undefined ? [] : this.title.split(/[,\.\-#+^<´>|;:_'*~?=\")(/&%$§!) ]+/);
         for(let i = 0; i < words.length; i++){
             if(words[i] == false || words[i] == null || words[i] == '' || words[i] == ' ' || typeof words[i] === 'undefined' || words[i] == " "){
                 words.splice(i, 1);

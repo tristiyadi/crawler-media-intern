@@ -46,9 +46,21 @@ try {
                 await dm.saveCurrentScan(sourceId, links);
             });
 
-            // Schedule.scheduleJob('*/10 * * * *', downloadLinks);
-            // Schedule.scheduleJob('5-59/10 * * * *', processLinks);
+            Schedule.scheduleJob('*/10 * * * *', downloadLinks);
+            Schedule.scheduleJob('5-59/10 * * * *', processLinks);
 
+             //Every day
+            // Schedule.scheduleJob('15 23 * * *', function(){
+            //     //RolloverBlacklist
+            //     for (i = 0; i < Sources.length; i++)
+            //     {
+            //         console.log("Switching blacklist: " + Sources[i].name);
+            //         dm.rolloverBlacklist(Sources[i].id);        
+            //     }
+
+            //     dm.deleteDetails();
+            // });
+            
             downloadLinks();
             setTimeout(processLinks, 1000 * 10);
             
